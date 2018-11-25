@@ -7,9 +7,9 @@
         </div>
           <form method="post">
           <div class="form-group">
-            <label for="kt">Nama Kandidat</label>
-            <input type="hidden" name="id_kandidat" value="<?php if(!empty($edit)){ echo $edit->id_kandidat; }?>">
-            <input type="text" class="form-control" id="kt" name="kandidat[nama_kandidat]"  value="<?php if(!empty($edit)){ echo $edit->nama_kandidat; }?>" required>
+            <label for="kt">Nama karyawan</label>
+            <input type="hidden" name="id_karyawan" value="<?php if(!empty($edit)){ echo $edit->id_karyawan; }?>">
+            <input type="text" class="form-control" id="kt" name="karyawan[nama_karyawan]"  value="<?php if(!empty($edit)){ echo $edit->nama_karyawan; }?>" required>
           </div>
           <button type="submit" class="btn btn-primary">Simpan</button>
         </form>

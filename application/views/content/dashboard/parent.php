@@ -19,7 +19,7 @@
 			</div>
 			<div class="panel panel-default">
 			  <div class="panel-body">
-			    <ol class="list-unstyled">
+			    <ol>
 			    	<?php foreach ($list_kriteria as $key) { ?>
 				  	<li> <?php echo $key->nama_kriteria; ?></li>
 				  	<?php } ?>
@@ -29,13 +29,13 @@
 		  </div>
 		  <div class="col-xs-12 col-sm-12 col-md-4">
 		  	<div class="page-header">
-			  <h5>Kandidat</h5>
+			  <h5>karyawan</h5>
 			</div>
 			<div class="panel panel-default">
 			  <div class="panel-body">
 			    <ol>
-			    	<?php foreach ($list_kandidat as $key) { ?>
-				  	<li> <?php echo $key->nama_kandidat; ?></li>
+			    	<?php foreach ($list_karyawan as $key) { ?>
+				  	<li> <?php echo $key->nama_karyawan; ?></li>
 				  	<?php } ?>
 				</ol>
 			  </div>

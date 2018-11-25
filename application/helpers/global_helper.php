@@ -1,9 +1,9 @@
 <?php
 
 if (!function_exists('normalisasi')) {
-  function normalisasi($id_kandidat, $id_kriteria, $nilai_normalisasi, $bobot_normalisasi){
+  function normalisasi($id_karyawan, $id_kriteria, $nilai_normalisasi, $bobot_normalisasi){
 	$CI = & get_instance();
-		$where['id_kandidat']= $id_kandidat;
+		$where['id_karyawan']= $id_karyawan;
 		$where['id_kriteria']= $id_kriteria;
 		$rangking['nilai_normalisasi']= $nilai_normalisasi;
 		$rangking['bobot_normalisasi']= $bobot_normalisasi;

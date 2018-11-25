@@ -14,13 +14,13 @@ class GlobalModel extends CI_Model{
       return $data;
    }
 
-   public function get_rangking($id_kandidat=false, $id_kriteria=false){
+   public function get_rangking($id_karyawan=false, $id_kriteria=false){
       $this->db->select('*');
       $this->db->from('rangking');
-      $this->db->join('kandidat', 'kandidat.id_kandidat=rangking.id_kandidat');
+      $this->db->join('karyawan', 'karyawan.id_karyawan=rangking.id_karyawan');
       $this->db->join('kriteria', 'kriteria.id_kriteria=rangking.id_kriteria');
-      if($id_kandidat){
-      $this->db->where('rangking.id_kandidat', $id_kandidat);
+      if($id_karyawan){
+      $this->db->where('rangking.id_karyawan', $id_karyawan);
       }
       if($id_kriteria){
       $this->db->where('rangking.id_kriteria', $id_kriteria);

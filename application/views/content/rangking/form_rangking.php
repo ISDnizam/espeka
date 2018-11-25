@@ -7,13 +7,13 @@
       </div>
       
           <form method="post">
-            <input type="hidden" name="id_kandidat" value="<?php if(!empty($edit)){ echo $edit->id_kandidat; }?>">
+            <input type="hidden" name="id_karyawan" value="<?php if(!empty($edit)){ echo $edit->id_karyawan; }?>">
             <input type="hidden" name="id_kriteria" value="<?php if(!empty($edit)){ echo $edit->id_kriteria; }?>">
           <div class="form-group">
-             <label for="tp">Kandidat</label>
-            <select class="form-control" id="tp" name="rangking[id_kandidat]" >
-               <?php foreach ($list_kandidat as $key) { ?>
-              <option value='<?php echo $key->id_kandidat;?>' <?php if(!empty($edit)){ if($edit->id_kandidat==$key->id_kandidat) { echo 'selected'; } } ?>><?php echo $key->nama_kandidat;?></option>
+             <label for="tp">karyawan</label>
+            <select class="form-control" id="tp" name="rangking[id_karyawan]" >
+               <?php foreach ($list_karyawan as $key) { ?>
+              <option value='<?php echo $key->id_karyawan;?>' <?php if(!empty($edit)){ if($edit->id_karyawan==$key->id_karyawan) { echo 'selected'; } } ?>><?php echo $key->nama_karyawan;?></option>
             <?php } ?>
             </select>
           </div>

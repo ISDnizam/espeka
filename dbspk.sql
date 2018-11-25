@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.8.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 28, 2016 at 05:42 
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Host: 127.0.0.1
+-- Generation Time: Nov 25, 2018 at 05:37 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,20 +25,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kandidat`
+-- Table structure for table `karyawan`
 --
 
-CREATE TABLE `kandidat` (
-  `id_kandidat` int(11) NOT NULL,
-  `nama_kandidat` varchar(255) NOT NULL,
-  `hasil_kandidat` double NOT NULL
+CREATE TABLE `karyawan` (
+  `id_karyawan` int(11) NOT NULL,
+  `nama_karyawan` varchar(255) NOT NULL,
+  `nilai_karyawan` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kandidat`
+-- Dumping data for table `karyawan`
 --
 
-INSERT INTO `kandidat` (`id_kandidat`, `nama_kandidat`, `hasil_kandidat`) VALUES
+INSERT INTO `karyawan` (`id_karyawan`, `nama_karyawan`, `nilai_karyawan`) VALUES
 (7, 'Agus-Slyvi', 395.555555555556),
 (8, 'Anies-Sandiaga', 377.5),
 (9, 'Ahok-Djarot', 359.16666666666697);
@@ -106,7 +108,7 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_lengkap`, `username`, `password`) VALUES
-(1, 'Hanif', 'admin', '21232f297a57a5a743894a0e4a801fc3');
+(1, 'Nizam', 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -115,7 +117,7 @@ INSERT INTO `pengguna` (`id_pengguna`, `nama_lengkap`, `username`, `password`) V
 --
 
 CREATE TABLE `rangking` (
-  `id_kandidat` int(11) NOT NULL,
+  `id_karyawan` int(11) NOT NULL,
   `id_kriteria` int(11) NOT NULL,
   `nilai_rangking` double NOT NULL,
   `nilai_normalisasi` double NOT NULL,
@@ -126,35 +128,35 @@ CREATE TABLE `rangking` (
 -- Dumping data for table `rangking`
 --
 
-INSERT INTO `rangking` (`id_kandidat`, `id_kriteria`, `nilai_rangking`, `nilai_normalisasi`, `bobot_normalisasi`) VALUES
-(7, 7, 90, 1, 90),
+INSERT INTO `rangking` (`id_karyawan`, `id_kriteria`, `nilai_rangking`, `nilai_normalisasi`, `bobot_normalisasi`) VALUES
+(7, 7, 70, 0.77777777777778, 70),
 (7, 8, 80, 0.88888888888889, 75.555555555556),
 (7, 9, 90, 1, 90),
 (7, 10, 90, 1, 80),
 (7, 11, 70, 1, 60),
-(7, 12, 70, 0, 0),
+(7, 12, 70, 1, 70),
 (8, 7, 80, 0.88888888888889, 80),
 (8, 8, 90, 1, 85),
 (8, 9, 80, 0.88888888888889, 80),
 (8, 10, 90, 1, 80),
 (8, 11, 80, 0.875, 52.5),
-(8, 12, 70, 0, 0),
+(8, 12, 70, 1, 70),
 (9, 7, 90, 1, 90),
 (9, 8, 80, 0.88888888888889, 75.555555555556),
 (9, 9, 70, 0.77777777777778, 70),
 (9, 10, 80, 0.88888888888889, 71.111111111111),
 (9, 11, 80, 0.875, 52.5),
-(9, 12, 70, 0, 0);
+(9, 12, 70, 1, 70);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `kandidat`
+-- Indexes for table `karyawan`
 --
-ALTER TABLE `kandidat`
-  ADD PRIMARY KEY (`id_kandidat`);
+ALTER TABLE `karyawan`
+  ADD PRIMARY KEY (`id_karyawan`);
 
 --
 -- Indexes for table `kriteria`
@@ -178,7 +180,7 @@ ALTER TABLE `pengguna`
 -- Indexes for table `rangking`
 --
 ALTER TABLE `rangking`
-  ADD PRIMARY KEY (`id_kandidat`,`id_kriteria`),
+  ADD PRIMARY KEY (`id_karyawan`,`id_kriteria`),
   ADD KEY `id_kriteria` (`id_kriteria`);
 
 --
@@ -186,25 +188,29 @@ ALTER TABLE `rangking`
 --
 
 --
--- AUTO_INCREMENT for table `kandidat`
+-- AUTO_INCREMENT for table `karyawan`
 --
-ALTER TABLE `kandidat`
-  MODIFY `id_kandidat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `karyawan`
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
   MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
   MODIFY `id_nilai` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
   MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Constraints for dumped tables
 --
@@ -213,8 +219,9 @@ ALTER TABLE `pengguna`
 -- Constraints for table `rangking`
 --
 ALTER TABLE `rangking`
-  ADD CONSTRAINT `rangking_ibfk_1` FOREIGN KEY (`id_kandidat`) REFERENCES `kandidat` (`id_kandidat`),
+  ADD CONSTRAINT `rangking_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id_karyawan`),
   ADD CONSTRAINT `rangking_ibfk_2` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

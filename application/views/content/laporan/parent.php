@@ -13,11 +13,11 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="rangking">
         <br/>
-        <h4>Nilai Kriteria Kandidat</h4>
+        <h4>Nilai Kriteria karyawan</h4>
    <table width="100%" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th rowspan="2" style="vertical-align: middle" class="text-center">Kandidat</th>
+                    <th rowspan="2" style="vertical-align: middle" class="text-center">karyawan</th>
                     <th colspan="<?php echo count($list_kriteria); ?>" class="text-center">Kriteria</th>
                 </tr>
                 <tr>
@@ -28,17 +28,17 @@
             </thead>
     
             <tbody>
-            <?php foreach ($list_kandidat as $kandidat) {?>
+            <?php foreach ($list_karyawan as $karyawan) {?>
                 <tr>
-                    <th><?php echo $kandidat->nama_kandidat; ?></th>
+                    <th><?php echo $karyawan->nama_karyawan; ?></th>
                     <?php
-                    $a= $kandidat->id_kandidat;
+                    $a= $karyawan->id_karyawan;
                      foreach ($list_kriteria as $kriteria) {
                       $b = $kriteria->id_kriteria;
                       $tipe = $kriteria->tipe_kriteria;
                       $bobot = $kriteria->bobot_kriteria;  ?>
                       <td>
-                      <?php echo $rangking[$kandidat->id_kandidat][$kriteria->id_kriteria]->nilai_rangking; ?>
+                      <?php echo $rangking[$karyawan->id_karyawan][$kriteria->id_kriteria]->nilai_rangking; ?>
                       </td>
                     <?php } ?>
                 </tr>
@@ -49,7 +49,7 @@
       <table width="100%" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th rowspan="2" style="vertical-align: middle" class="text-center">Kandidat</th>
+                    <th rowspan="2" style="vertical-align: middle" class="text-center">karyawan</th>
                     <th colspan="<?php echo count($list_kriteria); ?>" class="text-center">Kriteria</th>
                 </tr>
                 <tr>
@@ -60,13 +60,13 @@
             </thead>
     
             <tbody>
-            <?php foreach ($list_kandidat as $kandidat) {?>
+            <?php foreach ($list_karyawan as $karyawan) {?>
                 <tr>
-                    <th><?php echo $kandidat->nama_kandidat; ?></th>
+                    <th><?php echo $karyawan->nama_karyawan; ?></th>
                     <?php
                     foreach ($list_kriteria as $kriteria) { ?>
                     <td>
-                      <?php echo $rangking[$kandidat->id_kandidat][$kriteria->id_kriteria]->nilai_normalisasi; ?>
+                      <?php echo $rangking[$karyawan->id_karyawan][$kriteria->id_kriteria]->nilai_normalisasi; ?>
                     </td>
                     <?php
                     }
@@ -87,7 +87,7 @@
       <table width="100%" id="table-akhir" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th rowspan="2" style="vertical-align: middle" class="text-center">Kandidat</th>
+                    <th rowspan="2" style="vertical-align: middle" class="text-center">karyawan</th>
                     <th colspan="<?php echo count($list_kriteria); ?>" class="text-center">Kriteria</th>
                     <th rowspan="2" style="vertical-align: middle" class="text-center">Hasil</th>
                 </tr>
@@ -99,17 +99,17 @@
             </thead>
     
             <tbody>
-            <?php foreach ($list_kandidat as $kandidat) {?>
+            <?php foreach ($list_karyawan as $karyawan) {?>
                 <tr>
-                    <th><?php echo $kandidat->nama_kandidat; ?></th>
+                    <th><?php echo $karyawan->nama_karyawan; ?></th>
                    <?php  foreach ($list_kriteria as $kriteria) { ?>
                     <td>
-                      <?php echo $rangking[$kandidat->id_kandidat][$kriteria->id_kriteria]->bobot_normalisasi; ?>
+                      <?php echo $rangking[$karyawan->id_karyawan][$kriteria->id_kriteria]->bobot_normalisasi; ?>
                     </td>
                     <?php }  ?>
             <td>
               <?php 
-              echo $kandidat->hasil_kandidat;
+              echo $karyawan->nilai_karyawan;
               ?>
             </td>
                 </tr>

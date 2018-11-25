@@ -150,53 +150,53 @@ class Pages extends CI_Controller{
 
 
 
-   function kandidat(){
-      $data['title'] = "Data kandidat";
+   function karyawan(){
+      $data['title'] = "Data karyawan";
       if($this->id_pengguna){
          $data['pengguna'] = $this->GlobalModel->get_data('pengguna', ['id_pengguna' => $this->id_pengguna])->row();
       }
-      $data['list'] = $this->GlobalModel->get_data('kandidat')->result();
+      $data['list'] = $this->GlobalModel->get_data('karyawan')->result();
       $this->load->view('layout/header', $data);
-      $this->load->view('content/kandidat/parent');
+      $this->load->view('content/karyawan/parent');
       $this->load->view('layout/footer');
       }
 
-    function tambah_kandidat(){
-      $data['title'] = "Tambah kandidat";
+    function tambah_karyawan(){
+      $data['title'] = "Tambah karyawan";
       if($this->id_pengguna){
          $data['pengguna'] = $this->GlobalModel->get_data('pengguna', ['id_pengguna' => $this->id_pengguna])->row();
       }
-      $kandidat = $this->input->post('kandidat');
-      if($kandidat){
-         $this->db->insert('kandidat', $kandidat);
-         redirect('pages/kandidat');
+      $karyawan = $this->input->post('karyawan');
+      if($karyawan){
+         $this->db->insert('karyawan', $karyawan);
+         redirect('pages/karyawan');
       }
       $this->load->view('layout/header', $data);
-      $this->load->view('content/kandidat/form_kandidat');
-      $this->load->view('layout/footer');
-   }
-
-    function edit_kandidat($id_kandidat){
-      $data['title'] = "Edit kandidat";
-      if($this->id_pengguna){
-         $data['pengguna'] = $this->GlobalModel->get_data('pengguna', ['id_pengguna' => $this->id_pengguna])->row();
-      }
-      $data['edit'] = $this->GlobalModel->get_data('kandidat', ['id_kandidat' => $id_kandidat])->row();
-      $kandidat = $this->input->post('kandidat');
-      if($kandidat){
-         $this->db->where('id_kandidat', $id_kandidat)->update('kandidat', $kandidat);
-         redirect('pages/kandidat');
-      }
-      $this->load->view('layout/header', $data);
-      $this->load->view('content/kandidat/form_kandidat');
+      $this->load->view('content/karyawan/form_karyawan');
       $this->load->view('layout/footer');
    }
 
-    function hapus_kandidat($id_kandidat){
-      $data['title'] = "Hapus kandidat";
-      if($id_kandidat){
-      $this->db->where('id_kandidat', $id_kandidat)->delete('kandidat');
-      redirect('pages/kandidat');
+    function edit_karyawan($id_karyawan){
+      $data['title'] = "Edit karyawan";
+      if($this->id_pengguna){
+         $data['pengguna'] = $this->GlobalModel->get_data('pengguna', ['id_pengguna' => $this->id_pengguna])->row();
+      }
+      $data['edit'] = $this->GlobalModel->get_data('karyawan', ['id_karyawan' => $id_karyawan])->row();
+      $karyawan = $this->input->post('karyawan');
+      if($karyawan){
+         $this->db->where('id_karyawan', $id_karyawan)->update('karyawan', $karyawan);
+         redirect('pages/karyawan');
+      }
+      $this->load->view('layout/header', $data);
+      $this->load->view('content/karyawan/form_karyawan');
+      $this->load->view('layout/footer');
+   }
+
+    function hapus_karyawan($id_karyawan){
+      $data['title'] = "Hapus karyawan";
+      if($id_karyawan){
+      $this->db->where('id_karyawan', $id_karyawan)->delete('karyawan');
+      redirect('pages/karyawan');
      }
    }
 
@@ -210,13 +210,13 @@ class Pages extends CI_Controller{
       }
       $data['list_nilai'] = $this->GlobalModel->get_data('nilai')->result();
       $data['list_kriteria'] = $this->GlobalModel->get_data('kriteria')->result();
-      $data['list_kandidat'] = $this->GlobalModel->get_data('kandidat')->result();
+      $data['list_karyawan'] = $this->GlobalModel->get_data('karyawan')->result();
       $data['list_rangking'] = $this->GlobalModel->get_rangking()->result();
       
      
-      foreach ($data['list_kandidat'] as $kandidat) {
+      foreach ($data['list_karyawan'] as $karyawan) {
          foreach ($data['list_kriteria'] as $kriteria) {
-         $data['rangking'][$kandidat->id_kandidat][$kriteria->id_kriteria] = $this->GlobalModel->get_rangking($kandidat->id_kandidat, $kriteria->id_kriteria)->row();
+         $data['rangking'][$karyawan->id_karyawan][$kriteria->id_kriteria] = $this->GlobalModel->get_rangking($karyawan->id_karyawan, $kriteria->id_kriteria)->row();
          }
       }
       $this->load->view('layout/header', $data);
@@ -234,14 +234,14 @@ class Pages extends CI_Controller{
       }
       $data['list_nilai'] = $this->GlobalModel->get_data('nilai')->result();
       $data['list_kriteria'] = $this->GlobalModel->get_data('kriteria')->result();
-      $data['list_kandidat'] = $this->GlobalModel->get_data('kandidat')->result();
+      $data['list_karyawan'] = $this->GlobalModel->get_data('karyawan')->result();
 
 
       $rangking = $this->input->post('rangking');
       if($rangking){
-         $check_data = $this->GlobalModel->get_rangking($rangking['id_kandidat'], $rangking['id_kriteria'])->result();
+         $check_data = $this->GlobalModel->get_rangking($rangking['id_karyawan'], $rangking['id_kriteria'])->result();
          if($check_data){
-         $this->db->where(array('id_kandidat' => $rangking['id_kandidat'],'id_kriteria'=>$rangking['id_kriteria']))->update('rangking', $rangking);
+         $this->db->where(array('id_karyawan' => $rangking['id_karyawan'],'id_kriteria'=>$rangking['id_kriteria']))->update('rangking', $rangking);
          }else{
          $this->db->insert('rangking', $rangking);
          }
@@ -256,24 +256,24 @@ class Pages extends CI_Controller{
       $data['title'] = "Edit rangking";
       $data['list_nilai'] = $this->GlobalModel->get_data('nilai')->result();
       $data['list_kriteria'] = $this->GlobalModel->get_data('kriteria')->result();
-      $data['list_kandidat'] = $this->GlobalModel->get_data('kandidat')->result();
+      $data['list_karyawan'] = $this->GlobalModel->get_data('karyawan')->result();
 
       if($this->id_pengguna){
          $data['pengguna'] = $this->GlobalModel->get_data('pengguna', ['id_pengguna' => $this->id_pengguna])->row();
       }
-      $id_kandidat='';
+      $id_karyawan='';
       $id_kriteria='';
-      if(!empty($_GET['id_kandidat'])){
-         $id_kandidat = $_GET['id_kandidat'];
+      if(!empty($_GET['id_karyawan'])){
+         $id_karyawan = $_GET['id_karyawan'];
       }
       if(!empty($_GET['id_kriteria'])){
          $id_kriteria = $_GET['id_kriteria'];
       }
 
-      $data['edit'] = $this->GlobalModel->get_rangking($id_kandidat, $id_kriteria)->row();
+      $data['edit'] = $this->GlobalModel->get_rangking($id_karyawan, $id_kriteria)->row();
       $rangking = $this->input->post('rangking');
       if($rangking){
-         $this->db->where(array('id_kandidat' => $id_kandidat,'id_kriteria'=>$id_kriteria))->update('rangking', $rangking);
+         $this->db->where(array('id_karyawan' => $id_karyawan,'id_kriteria'=>$id_kriteria))->update('rangking', $rangking);
          redirect('pages/rangking');
       }
       $this->load->view('layout/header', $data);
@@ -282,17 +282,17 @@ class Pages extends CI_Controller{
    }
 
     function hapus_rangking(){
-      $id_kandidat='';
+      $id_karyawan='';
       $id_kriteria='';
-      if(!empty($_GET['id_kandidat'])){
-         $id_kandidat = $_GET['id_kandidat'];
+      if(!empty($_GET['id_karyawan'])){
+         $id_karyawan = $_GET['id_karyawan'];
       }
       if(!empty($_GET['id_kriteria'])){
          $id_kriteria = $_GET['id_kriteria'];
       }
       $data['title'] = "Hapus rangking";
-      if($id_kandidat!='' and $id_kriteria!=''){
-      $this->db->where(array('id_kandidat' => $id_kandidat,'id_kriteria'=>$id_kriteria))->delete('rangking');
+      if($id_karyawan!='' and $id_kriteria!=''){
+      $this->db->where(array('id_karyawan' => $id_karyawan,'id_kriteria'=>$id_kriteria))->delete('rangking');
       redirect('pages/rangking');
      }
    }
@@ -308,13 +308,13 @@ class Pages extends CI_Controller{
       }
       $data['list_nilai'] = $this->GlobalModel->get_data('nilai')->result();
       $data['list_kriteria'] = $this->GlobalModel->get_data('kriteria')->result();
-      $data['list_kandidat'] = $this->GlobalModel->get_data('kandidat')->result();
+      $data['list_karyawan'] = $this->GlobalModel->get_data('karyawan')->result();
       $data['list_rangking'] = $this->GlobalModel->get_rangking()->result();
       
      
-      foreach ($data['list_kandidat'] as $kandidat) {
+      foreach ($data['list_karyawan'] as $karyawan) {
          foreach ($data['list_kriteria'] as $kriteria) {
-         $data['rangking'][$kandidat->id_kandidat][$kriteria->id_kriteria] = $this->GlobalModel->get_rangking($kandidat->id_kandidat, $kriteria->id_kriteria)->row();
+         $data['rangking'][$karyawan->id_karyawan][$kriteria->id_kriteria] = $this->GlobalModel->get_rangking($karyawan->id_karyawan, $kriteria->id_kriteria)->row();
          }
       }
       $this->load->view('layout/header', $data);

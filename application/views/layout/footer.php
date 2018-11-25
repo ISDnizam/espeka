@@ -13,7 +13,7 @@
       $(document).ready(function() {
         $('#tabeldata').DataTable();
     });
-<?php if(!empty($list_kandidat)){ ?>
+<?php if(!empty($list_karyawan)){ ?>
   var chart1; // globally available
   $(document).ready(function() {
         chart1 = new Highcharts.Chart({
@@ -25,7 +25,7 @@
               text: 'Grafik Perangkingan '
            },
            xAxis: {
-              categories: ['Kandidat']
+              categories: ['karyawan']
            },
            yAxis: {
               title: {
@@ -34,10 +34,10 @@
            },
                 series:            
               [
-            <?php foreach ($list_kandidat as $key) { ?>
+            <?php foreach ($list_karyawan as $key) { ?>
                     {
-                        name: '<?php echo $key->nama_kandidat; ?>',
-                        data: [<?php echo $key->hasil_kandidat; ?>]
+                        name: '<?php echo $key->nama_karyawan; ?>',
+                        data: [<?php echo $key->nilai_karyawan; ?>]
                     },
                     <?php } ?>
               ]
