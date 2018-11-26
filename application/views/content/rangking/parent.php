@@ -96,7 +96,11 @@
                     </td>
               <?php } ?>
             <td>
-              <?php echo $rangking[$karyawan->id_karyawan][$kriteria->id_kriteria]->bobot_normalisasi; ?>
+               <?php 
+              $hasil_kandidat = read_hasil_kandidat($a);
+              echo $hasil_kandidat->bobot_normalisasi;
+              set_hasil_kandidat($a, $hasil_kandidat->bobot_normalisasi);           
+              ?>
             </td>
                 </tr>
             <?php } ?>
