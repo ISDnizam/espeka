@@ -15,17 +15,32 @@ if (!function_exists('normalisasi')) {
 	if (!function_exists('get_max')) {
 		function get_max($id_kriteria){
 				$CI = & get_instance();
-		        $venue=$CI->db->query("SELECT max(nilai_rangking) as nilai_max FROM rangking WHERE id_kriteria=".$id_kriteria."")->row();
-				return $venue;
+		        $query=$CI->db->query("SELECT max(nilai_rangking) as nilai_max FROM rangking WHERE id_kriteria=".$id_kriteria."")->row();
+				return $query;
 			}
 	}
 
-		if (!function_exists('get_min')) {
+	if (!function_exists('get_min')) {
 		function get_min($id_kriteria){
 				$CI = & get_instance();
-		        $venue=$CI->db->query("SELECT min(nilai_rangking)  as nilai_min FROM rangking WHERE id_kriteria=".$id_kriteria."")->row();
-				return $venue;
+		        $query=$CI->db->query("SELECT min(nilai_rangking)  as nilai_min FROM rangking WHERE id_kriteria=".$id_kriteria."")->row();
+				return $query;
 			}
 	}
 
+	if (!function_exists('read_hasil_kandidat')) {
+		function read_hasil_kandidat($id_kandidat){
+				$CI = & get_instance();
+		        $query=$CI->db->query("SELECT sum(bobot_normalisasi) as bobot_normalisasi FROM rangking WHERE id_kandidat=".$id_kandidat."")->row();
+				return $query;
+			}
+	}
+	if (!function_exists('set_hasil_kandidat')) {
+		function set_hasil_kandidat($id_kandidat,$hasil_kandidat){
+				$CI = & get_instance();
+				$kandidat['hasil_kandidat'] = $hasil_kandidat;
+        		$CI->db->where('id_kandidat', $id_kandidat)->update('kandidat', $kandidat);
+				return true;
+			}
+	}
 ?>
